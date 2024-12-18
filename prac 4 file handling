@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Student
+{
+    int rollno;
+    string name;
+
+public:
+    void getdata()
+    {
+        cout << "Enter name : ";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Enter roll no :";
+        cin >> rollno;
+    }
+
+    void show()
+    {
+        cout << "The roll no is : " << rollno << endl;
+        cout << "The name is : " << name << endl;
+    }
+};
+
+int main()
+{
+    int n,i;
+    cout << "Enter n :";
+    cin >> n;
+    Student s[n];
+    ofstream fout("Stud.txt", ios::app);
+    while (n--)
+    {
+        s[n].getdata();
+        fout.write((char *)&s[n], sizeof(s[n]));
+        i++;
+    }
+    fout.close();
+    ifstream fin("Stud.txt", ios::in);
+    while(i--)
+    {
+        fin.read((char *)&s[i], sizeof(s[i]));
+        s[i].show();
+    }
+    fin.close();
+    return 0;
+}

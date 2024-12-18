@@ -1,0 +1,77 @@
+#include <graphics.h>
+#include <conio.h>
+#include <cmath>
+
+class Graphics {
+public:
+    void init() {
+        int gd = DETECT, gm;
+        initgraph(&gd, &gm, "C:\\Turboc3\\BGI");
+    }
+
+    void close() {
+        closegraph();
+    }
+
+    void drawCircle(int xc, int yc, int r) {
+        int x = 0, y = r;
+        int d = 3 - 2 * r;
+        while (y >= x) {
+            plotCirclePoints(xc, yc, x, y);
+            x++;
+            if (d > 0) {
+                y--;
+                d = d + 4 * (x - y) + 10;
+            } else {
+                d = d + 4 * x + 6;
+            }
+            plotCirclePoints(xc, yc, x, y);
+        }
+    }
+
+    void drawLine(int x0, int y0, int x1, int y1) {
+        int dx = x1 - x0;
+        int dy = y1 - y0;
+        int steps = std::max(abs(dx), abs(dy));
+        float xInc = dx / (float) steps;
+        float yInc = dy / (float) steps;
+        float x = x0;
+        float y = y0;
+        for (int i = 0; i <= steps; i++) {
+            putpixel(x, y, WHITE);
+            x += xInc;
+            y += yInc;
+        }
+    }
+
+private:
+    void plotCirclePoints(int xc, int yc, int x, int y) {
+        putpixel(xc + x, yc + y, WHITE);
+        putpixel(xc - x, yc + y, WHITE);
+        putpixel(xc + x, yc - y, WHITE);
+        putpixel(xc - x, yc - y, WHITE);
+        putpixel(xc + y, yc + x, WHITE);
+        putpixel(xc - y, yc + x, WHITE);
+        putpixel(xc + y, yc - x, WHITE);
+        putpixel(xc - y, yc - x, WHITE);
+    }
+};
+
+int main() {
+    Graphics g;
+    g.init();
+
+    // Draw the circles
+    g.drawCircle(200, 200, 100); // Outer circle
+    g.drawCircle(200, 200, 50);  // Inner circle
+
+    // Draw the triangle
+    g.drawLine(100, 200, 300, 200); // Base of the triangle
+    g.drawLine(200, 100, 100, 200); // Left side of the triangle
+    g.drawLine(200, 100, 300, 200); // Right side of the triangle
+
+    getch();
+    g.close();
+
+    return 0;
+}

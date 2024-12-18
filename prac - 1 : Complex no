@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Complex
+{
+    int r,i;
+    public:
+    Complex()
+    {
+        r = 0;
+        i = 0;
+    }
+    Complex operator +(Complex& ref)
+    {
+        Complex res;
+        res.r = r + ref.r;
+        res.i = i + ref.i;
+        return res;
+    }
+
+    Complex operator -(Complex& ref)
+    {
+        Complex res;
+        res.r = r - ref.r;
+        res.i = i - ref.i;
+        return res;
+    }
+    Complex operator *(Complex& ref)
+    {
+        Complex res;
+        res.r = r*ref.r -(i*ref.i);
+        res.i =(r*ref.i)+ (i*ref.r);
+        return res;
+    }
+
+    friend istream &operator >>(istream& input,Complex& ref)
+    {
+        cout<<"Enter the real part of complex no : ";
+        input>>ref.r;
+        cout<<"Enter the imaginary part of the complex no : ";
+        input>>ref.i;
+        return input;
+    }
+
+    friend ostream& operator <<(ostream& out,Complex& ref)
+    {
+        out<<"("<<ref.r<<" + "<<"!"<<ref.i<<")"<<endl;
+        return out;
+    }
+};
+
+int main()
+{
+    Complex a,b;
+    cin>>a;
+    cin>>b;
+    Complex c1 = a + b;
+    Complex c2 = a * b;
+    Complex c3 = a - b;
+    cout<<"The addition is : "<<c1;
+    cout<<"The multiplication is : "<<c2;
+    cout<<"The substraction is : "<<c3;
+    return 0;
+}
+
+
+

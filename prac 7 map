@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    map<int,char> m;
+    int i = 5;
+    char c;
+    while(i--)
+    {
+        cout<<"Enter the char : ";
+        cin>>c;
+        m.insert(make_pair(i,c));
+    }
+    map<int,char> :: iterator it = m.begin();
+    while(it != m.end())
+    {
+        cout<<it->first<<" "<<it->second<<endl;   
+        it++;
+    }
+    return 0;
+}

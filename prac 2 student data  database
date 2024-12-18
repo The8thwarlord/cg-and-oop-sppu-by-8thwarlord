@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+using namespace std;
+// class Student;
+class Studdata
+{
+    string drivl;
+    char *mobno;
+    string address;
+    friend class Student;
+    void ssetdata()
+    {
+        cout << "Enter the driving licence of the student : ";
+        cin >> drivl;
+        cout << "Enter mobile no of the student : ";
+        cin >> mobno;
+        cout << "Enter the address of the student : ";
+        cin >> address;
+    }
+    void sgetdata()
+    {
+        cout << "the  driving licence of the student is : " << drivl << endl;
+        cout << "The mobile no of the student : " << mobno << endl;
+        cout << "the address of the student : " << address << endl;
+    }
+
+public:
+    Studdata()
+    {
+        drivl = "";
+        mobno = new char[10];
+        address = "";
+    }
+    ~Studdata()
+    {
+        delete mobno;
+    }
+};
+
+class Student
+{
+private:
+    int rollno;
+    string name;
+    char div;
+    string Class;
+    string dob;
+    char *bloodgr;
+
+    static int count;
+
+public:
+    Student()
+    {
+        rollno = 0;
+        name = "";
+        div = ' ';
+        Class = "";
+        dob = "";
+        bloodgr = new char[2];
+        count++;
+    }
+    Student(Student &ref)
+    {
+        rollno = ref.rollno;
+        name = ref.name;
+        div = ref.div;
+        Class = ref.Class;
+        dob = ref.dob;
+        bloodgr = ref.bloodgr;
+    }
+    void setdata(Studdata &);
+    void getdata(Studdata &ref)
+    {
+        cout << "the roll no of the student : " << rollno << endl;
+        cout << "The name of the student : " << name << endl;
+        cout << "the blood group of the student : " << bloodgr << endl;
+        cout << "the date of birth of the student : " << dob << endl;
+        ref.sgetdata();
+    }
+    static int gettotal()
+    {
+        return count;
+    }
+
+    ~Student()
+    {
+        delete bloodgr;
+    }
+};
+inline void Student ::setdata(Studdata &ref)
+{
+    cout << "Enter the roll no of the student : ";
+    cin >> rollno;
+    cout << "Enter name of the student : ";
+    cin >> name;
+    cout << "Enter the div of the student : ";
+    cin >> div;
+    cout << "Enter the blood group of the student : ";
+    cin >> bloodgr;
+    cout << "Enter the date of birth of the student : ";
+    cin >> dob;
+    ref.ssetdata();
+}
+
+int Student ::count = 0;
+int main()
+{
+    Student s1;
+    Studdata s2;
+    s1.setdata(s2);
+    s1.getdata(s2);
+    cout << s1.gettotal();
+    return 0;
+}

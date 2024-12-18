@@ -1,0 +1,96 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Publication
+{
+    protected:
+    string title; 
+    float price;
+    Publication()
+    {
+        title = "";
+        price = 0;
+    }
+    void setdata()
+    {
+        cout<<"Enter the title of the publication : ";
+        cin>>title;
+        cout<<"Enter the price of the publication :";
+        cin>>price;
+    }
+    void show()
+    {
+        cout<<"The title of the publication is : "<<title<<endl;
+        cout<<"The price of the publication is : "<<price<<endl;
+    }
+};
+
+class Book : public Publication
+{
+    int page_count;
+    public:
+    Book()
+    {
+        page_count = 0;
+    }
+    void setdata()
+    {
+        cout<<"Enter the page count : ";
+        cin>>page_count;
+        try
+        {
+            if(page_count < 0) throw page_count;
+        }
+        catch(...)
+        {
+            cout<<"Invalid input"<<endl;
+            page_count = 0;
+        }
+        Publication :: setdata();
+    }
+    void show()
+    {
+        cout<<"The page count is : "<<page_count<<endl;
+        Publication :: show();
+    }
+};
+class Tape : Publication
+{
+    float play_time;
+    public:
+    Tape()
+    {
+        play_time = 0;
+    }
+    void setdata()
+    {
+        cout<<"Enter the play time of the tape : ";
+        cin>>play_time;
+        try
+        {
+            if(play_time < 0) throw play_time;
+        }
+        catch(...)
+        {
+            cout<<"Invalid input"<<endl;
+            play_time = 0.00;
+        }
+        
+        Publication :: setdata();
+    }
+    void show()
+    {
+        cout<<"The play time of the tape is : "<<play_time<<endl;
+        Publication :: show();
+    }
+};
+int main()
+{
+    Book b1;
+    b1.setdata();
+    b1.show();
+    Tape t1;
+    t1.setdata();
+    t1.show();
+    return 0;
+}
